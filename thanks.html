@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You — EnvDeck Pro</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+        background: #090b10;
+        color: #e2e8f0;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .card {
+        max-width: 540px;
+        width: 100%;
+        background: #10151f;
+        border: 1px solid rgba(16, 185, 129, 0.4);
+        border-radius: 14px;
+        padding: 32px;
+      }
+      .badge {
+        display: inline-block;
+        background: rgba(16, 185, 129, 0.15);
+        color: #6ee7b7;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 999px;
+        margin-bottom: 14px;
+      }
+      h1 { margin: 0 0 10px; font-size: 24px; color: #f8fafc; }
+      p, li { color: #cbd5e1; font-size: 14px; line-height: 1.65; }
+      ol { padding-left: 20px; margin: 16px 0 22px; }
+      code {
+        background: #090b10;
+        border: 1px solid #232d40;
+        border-radius: 5px;
+        padding: 2px 6px;
+        color: #6ee7b7;
+        font-size: 12px;
+      }
+      a { color: #10b981; text-decoration: none; font-weight: 600; }
+      a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <span class="badge">Payment Confirmed via Stripe</span>
+      <h1>Welcome to EnvDeck Pro!</h1>
+      <p>
+        Your offline EnvDeck Pro license key (<code>ENVDECK-LIFE-XXXX-XXXX</code> or
+        <code>ENVDECK-PRO-XXXX-XXXX</code>) has been sent to the email address you used at Stripe
+        checkout.
+      </p>
+      <ol>
+        <li>Open Chrome and click the <strong>EnvDeck</strong> toolbar icon to open the SidePanel.</li>
+        <li>Go to the <strong>Vault</strong> tab.</li>
+        <li>Paste your license key under <strong>Upgrade to EnvDeck Pro</strong> and click <strong>Activate</strong>.</li>
+      </ol>
+      <p style="font-size: 13px; color: #94a3b8;">
+        Activation works 100% offline — EnvDeck never phones home or tracks your browser.
+      </p>
+      <p><a href="./index.html">← Back to EnvDeck Homepage</a></p>
+    </div>
+  </body>
+</html>
