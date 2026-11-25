@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — EnvDeck</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+        background: #090b10;
+        color: #e2e8f0;
+        line-height: 1.7;
+      }
+      .wrap { max-width: 740px; margin: 48px auto; padding: 0 20px; }
+      a { color: #10b981; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      h1 { color: #f8fafc; margin-bottom: 6px; }
+      h2 { color: #f8fafc; margin-top: 28px; font-size: 18px; }
+      p, li { color: #cbd5e1; font-size: 15px; }
+      .meta { color: #94a3b8; font-size: 13px; margin-bottom: 24px; }
+      .box {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        border-radius: 10px;
+        padding: 14px 18px;
+        color: #a7f3d0;
+        margin-bottom: 24px;
+      }
+      code {
+        background: #141923;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #6ee7b7;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p><a href="./index.html">← Back to EnvDeck</a></p>
+      <h1>Privacy Policy — EnvDeck</h1>
+      <div class="meta">Effective Date: November 25, 2026</div>
+
+      <div class="box">
+        <strong>Summary:</strong> EnvDeck operates 100% locally inside your browser and makes
+        <strong>zero outbound network requests</strong>. We do not collect, transmit, or sell any
+        browsing data, headers, cookies, or personal information.
+      </div>
+
+      <h2>1. Data Collection</h2>
+      <p>
+        EnvDeck collects zero personal data, zero browsing history, zero analytics, and zero
+        telemetry. The extension contains no tracking scripts and never contacts developer-controlled
+        or third-party servers.
+      </p>
+
+      <h2>2. Local Data Storage</h2>
+      <p>
+        All environment profiles, HTTP header rules, URL redirect rules, captured cookie/storage
+        snapshots, and QA form templates are stored strictly on your device using Chrome's local
+        storage API (<code>chrome.storage.local</code>).
+      </p>
+
+      <h2>3. Permissions Usage</h2>
+      <ul>
+        <li><code>declarativeNetRequest</code> &amp; host permissions: apply user-defined header modifications and URL rules locally.</li>
+        <li><code>cookies</code>: read, create, edit, delete, and snapshot cookies on the active tab when initiated by the user.</li>
+        <li><code>scripting</code> &amp; <code>activeTab</code>: fill forms, inject QA edge-case strings, and inspect/restore web storage only upon explicit user action.</li>
+        <li><code>sidePanel</code>, <code>contextMenus</code>, <code>storage</code>, <code>tabs</code>: render the workbench UI and persist local profiles.</li>
+      </ul>
+
+      <h2>4. Team Export &amp; Encryption</h2>
+      <p>
+        Profile exports are generated entirely locally in your browser. Encrypted team bundles use
+        the browser's native Web Crypto API (<code>PBKDF2-SHA256</code> with 250,000 iterations +
+        <code>AES-256-GCM</code>). Your passphrase is never stored or transmitted.
+      </p>
+
+      <h2>5. Payments &amp; Licensing</h2>
+      <p>
+        Optional EnvDeck Pro purchases are processed externally via our Merchant of Record checkout
+        provider. License activation inside EnvDeck uses offline key verification so the extension
+        remains completely network-free.
+      </p>
+    </div>
+  </body>
+</html>

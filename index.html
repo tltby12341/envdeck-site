@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnvDeck — Zero-Tracking MV3 Dev & QA Workbench for Chrome</title>
+    <meta
+      name="description"
+      content="Zero-tracking Manifest V3 alternative to ModHeader, EditThisCookie & Fake Filler. Switch Headers, Cookies, Storage & QA test data 100% locally."
+    />
+    <style>
+      :root {
+        --bg: #090b10;
+        --panel: #10151f;
+        --panel-2: #151c29;
+        --border: #232d40;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --emerald: #10b981;
+        --emerald-soft: rgba(16, 185, 129, 0.14);
+        --cyan: #06b6d4;
+        --amber: #f59e0b;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: radial-gradient(circle at top center, rgba(16, 185, 129, 0.09), transparent 45%), var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      a { color: var(--emerald); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(35, 45, 64, 0.65);
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 18px;
+        color: #f8fafc;
+      }
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+        background: linear-gradient(135deg, var(--emerald), var(--cyan));
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #052e16;
+        font-weight: 800;
+        font-size: 14px;
+      }
+      nav { display: flex; gap: 18px; font-size: 14px; }
+      nav a { color: var(--muted); }
+      nav a:hover { color: var(--text); text-decoration: none; }
+      .hero { text-align: center; padding: 64px 0 44px; }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: var(--emerald-soft);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        color: #6ee7b7;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      h1 {
+        margin: 0 auto 16px;
+        max-width: 760px;
+        font-size: clamp(30px, 5vw, 48px);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #f8fafc;
+      }
+      .subtitle {
+        max-width: 680px;
+        margin: 0 auto 28px;
+        color: var(--muted);
+        font-size: 17px;
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 22px;
+        border-radius: 9px;
+        font-weight: 600;
+        font-size: 15px;
+        transition: transform 0.12s ease, opacity 0.12s ease;
+      }
+      .btn:hover { text-decoration: none; transform: translateY(-1px); }
+      .btn-primary { background: var(--emerald); color: #042f2e; }
+      .btn-secondary {
+        background: var(--panel-2);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .trust-bar {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+        font-size: 13px;
+        color: #a7f3d0;
+      }
+      section { padding: 36px 0; }
+      h2 {
+        font-size: 24px;
+        margin: 0 0 18px;
+        color: #f8fafc;
+        letter-spacing: -0.01em;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+      }
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+        color: #f8fafc;
+      }
+      .card p, .card li {
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .card ul { margin: 8px 0 0; padding-left: 18px; }
+      .card li { margin-bottom: 6px; }
+      .pill {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 3px 8px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+      }
+      .pill-green { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
+      .pill-cyan { background: rgba(6, 182, 212, 0.15); color: #67e8f9; }
+      .pill-amber { background: rgba(245, 158, 11, 0.15); color: #fcd34d; }
+      .pricing {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 18px;
+      }
+      .price-card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 24px;
+      }
+      .price-card.featured {
+        border-color: rgba(16, 185, 129, 0.55);
+        background: linear-gradient(180deg, rgba(16, 185, 129, 0.07), var(--panel));
+      }
+      .price { font-size: 32px; font-weight: 800; color: #f8fafc; margin: 6px 0 12px; }
+      .price span { font-size: 14px; font-weight: 500; color: var(--muted); }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        background: #0b1019;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 1px 6px;
+        font-size: 12px;
+        color: #6ee7b7;
+      }
+      footer {
+        margin-top: 36px;
+        padding: 26px 0 42px;
+        border-top: 1px solid rgba(35, 45, 64, 0.7);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <span class="brand-mark">E</span>
+          <span>EnvDeck</span>
+        </div>
+        <nav>
+          <a href="#features">Features</a>
+          <a href="#why">Why EnvDeck</a>
+          <a href="#pricing">Pricing</a>
+          <a href="./privacy.html">Privacy Policy</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="badge">Manifest V3 · 100% Local · Zero Outbound Network Requests</div>
+        <h1>Switch Headers, Cookies, Storage &amp; QA Test Data in One Click</h1>
+        <p class="subtitle">
+          EnvDeck is the clean-room, zero-tracking Chrome SidePanel workbench replacing ModHeader,
+          EditThisCookie, Fake Filler, and Bug Magnet — with built-in 1-click ModHeader JSON
+          migration and AES-256-GCM encrypted team sharing.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#pricing">Get EnvDeck for Chrome</a>
+          <a class="btn btn-secondary" href="./privacy.html">Read Zero-Network Privacy Policy</a>
+        </div>
+        <div class="trust-bar">
+          <span>✓ 0 External Network Calls</span>
+          <span>✓ 0 Telemetry / Analytics</span>
+          <span>✓ 1-Click ModHeader JSON Import</span>
+          <span>✓ WebCrypto AES-256-GCM</span>
+        </div>
+      </section>
+
+      <section id="why">
+        <h2>Why Developers Switch to EnvDeck</h2>
+        <div class="grid">
+          <div class="card">
+            <span class="pill pill-green">Zero-Tracking</span>
+            <h3>100% Local &amp; Verifiably Network-Free</h3>
+            <p>
+              Built after legacy header extensions were caught exfiltrating browsing history. No
+              telemetry, no analytics, no remote servers, and no forced cloud account. Your tokens
+              and cookies never leave <code>chrome.storage.local</code>.
+            </p>
+          </div>
+          <div class="card">
+            <span class="pill pill-cyan">Instant Migration</span>
+            <h3>1-Click ModHeader JSON Import</h3>
+            <p>
+              Already have exported ModHeader profiles? Drop your JSON file directly into EnvDeck
+              Vault to automatically import your request headers, response headers, and domain
+              filters in seconds.
+            </p>
+          </div>
+          <div class="card">
+            <span class="pill pill-amber">Leak Protection</span>
+            <h3>Domain Scope Safety Locks</h3>
+            <p>
+              Lock profiles to specific domains like <code>localhost</code> or
+              <code>staging.myapp.com</code> so your <code>Authorization</code> Bearer tokens never
+              accidentally leak to third-party sites.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <h2>Everything You Need in One Chrome SidePanel</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>1. Request &amp; Response Headers + URL Rules</h3>
+            <ul>
+              <li>Set, append, or remove Request &amp; Response headers via MV3 <code>declarativeNetRequest</code>.</li>
+              <li>One-click presets: Bearer Auth, Local CORS Unlock, Force No-Cache, Spoof IP, EU Locale, Mobile Safari UA.</li>
+              <li>Inject or strip URL query params (<code>?debug=true</code>) or redirect API calls to localhost.</li>
+              <li>Copy active request headers as a ready-to-run <code>curl</code> command.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>2. Cookies, Storage &amp; Session Snapshots</h3>
+            <ul>
+              <li>Full Cookie editor supporting <code>Secure</code>, <code>HttpOnly</code>, <code>SameSite</code>, and <code>__Host-</code> rules.</li>
+              <li>Inspect and edit live <code>localStorage</code> and <code>sessionStorage</code>.</li>
+              <li>Copy cookies as JSON, Cookie Header string, or Netscape <code>.txt</code>; import JSON arrays.</li>
+              <li><strong>One-Click Snapshots:</strong> capture a tab's cookies + storage and switch test accounts with auto-reload.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>3. Smart Form Filler &amp; Bug Magnet Payloads</h3>
+            <ul>
+              <li>Fill entire forms locally with <code>Alt+Shift+F</code> using React/Vue compatible native event dispatch.</li>
+              <li>Save custom QA form override templates for repeatable signups and checkouts.</li>
+              <li>Built-in XSS, SQLi, RTL/Emoji/Unicode, 256/1000-char overflow, and numeric boundary strings in SidePanel and right-click menu.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>4. AES-256-GCM Encrypted Team Sharing</h3>
+            <ul>
+              <li>Export profiles with PBKDF2-SHA256 (250k iterations) + AES-256-GCM passphrase encryption.</li>
+              <li>Safely share bug reproduction environments (including cookies &amp; tokens) over Slack or Jira.</li>
+              <li>Or export plain JSON with automatic one-click secret redaction.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing">
+        <h2>Simple, Developer-Friendly Pricing</h2>
+        <div class="pricing">
+          <div class="price-card">
+            <span class="pill pill-cyan">Free Forever</span>
+            <h3>EnvDeck Local</h3>
+            <div class="price">$0 <span>/ forever</span></div>
+            <ul>
+              <li>2 Environment Profiles with Domain Scopes</li>
+              <li>Full Request/Response Header &amp; URL Rule Editor</li>
+              <li>Full Cookie, <code>localStorage</code> &amp; <code>sessionStorage</code> Inspector</li>
+              <li>Smart Form Filler &amp; Bug Magnet Edge-Case Payloads</li>
+              <li>Plain JSON Export (with secret redaction) &amp; ModHeader JSON Import</li>
+            </ul>
+          </div>
+          <div class="price-card featured">
+            <span class="pill pill-green">Most Popular · No Subscription Fatigue</span>
+            <h3>EnvDeck Pro</h3>
+            <div class="price">$24 <span>lifetime (Early Bird $19) or $5/mo</span></div>
+            <ul>
+              <li>Unlimited Environment Profiles</li>
+              <li>AES-256-GCM Encrypted Team Profile Export &amp; Sharing</li>
+              <li>Unlimited Custom QA Form Templates</li>
+              <li>100% Offline License Key Verification — zero cloud lock-in</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div>© 2026 EnvDeck · Built for Developers &amp; QA Engineers</div>
+        <div style="display: flex; gap: 16px;">
+          <a href="./privacy.html">Privacy Policy</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
